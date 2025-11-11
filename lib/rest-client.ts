@@ -1,6 +1,6 @@
-export default async function fetchFromWordPress(
+export default async function fetchFromWordPress<T>(
     endpoint: string
-): Promise<any> {
+): Promise<T> {
     const baseUrl =
         process.env.WP_REST_ENDPOINT || "http://localhost/wp-json/wp/v2";
     const url = `${baseUrl}${
