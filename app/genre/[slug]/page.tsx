@@ -2,6 +2,7 @@ import { getBooksByGenre, getGenre } from "@/lib/api";
 import { notFound } from "next/navigation";
 
 import Genres from "@/components/Genres";
+import BookList from "@/components/BookList";
 
 import Link from "next/link";
 
@@ -27,19 +28,7 @@ export default async function GenrePage({
                 {books.length === 0 ? (
                     <p>No books found in this genre.</p>
                 ) : (
-                    <ul>
-                        {books.map((book) => (
-                            <li key={book.id}>
-                                <Link href={`/books/${book.slug}`}>
-                                    <span
-                                        dangerouslySetInnerHTML={{
-                                            __html: book.title.rendered,
-                                        }}
-                                    ></span>
-                                </Link>
-                            </li>
-                        ))}
-                    </ul>
+                    <BookList books={books} />
                 )}
             </section>
         </div>

@@ -22,6 +22,14 @@ export async function getGenres(): Promise<WPGenre[]> {
     return fetchFromWordPress("/genre");
 }
 
+export async function getGenresById(
+    ids: number | number[]
+): Promise<WPGenre[]> {
+    const idArray = Array.isArray(ids) ? ids : [ids];
+    const idString = idArray.join(",");
+    return fetchFromWordPress(`/genre?include=${idString}`);
+}
+
 export async function getGenre(slug: string): Promise<WPGenre | null> {
     const genres = await fetchFromWordPress<WPGenre[]>(`/genre?slug=${slug}`);
     return genres.length > 0 ? genres[0] : null;

@@ -12,9 +12,10 @@ export default function GenreLink({
 }) {
     const pathname = usePathname();
     const isActive = pathname === `/genre/${slug}`;
+    const className = `hover:underline ${isActive ? "font-bold" : ""}`.trim();
 
     return (
-        <Link href={`/genre/${slug}`} className={isActive ? "font-bold" : ""}>
+        <Link href={`/genre/${slug}`} className={className}>
             {children}
         </Link>
     );

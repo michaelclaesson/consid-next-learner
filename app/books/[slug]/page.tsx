@@ -1,5 +1,6 @@
-import { getBook } from "@/lib/api";
+import { getBook, getGenresById } from "@/lib/api";
 import { notFound } from "next/navigation";
+import Link from "next/link";
 
 import Genres from "@/components/Genres";
 
@@ -14,6 +15,8 @@ export default async function Book({
     if (!book) {
         notFound();
     }
+
+    const genres = await getGenresById(book.genre);
 
     return (
         <div className="flex justify-center gap-8 my-8 mx-auto w-full max-w-5xl">
@@ -32,6 +35,21 @@ export default async function Book({
                     </li>
                     <li>
                         <strong>Published:</strong> {book.acf.year}
+                    </li>
+                    <li>
+                        <div className="flex gap-1">
+                        <strong>{genres.length > 1 ? 'Genres:' : 'Genre:'}</strong>
+                        <div>
+                        {genres.map((genre, index) => (
+                            <span key={genre.id}>
+                                {index > 0 && ", "}
+                                <Link className="underline" href={`/genre/${genre.slug}`}>
+                                    {genre.name}
+                                </Link>
+                            </span>
+                        ))}
+                        </div>
+                        </div>
                     </li>
                 </ul>
             </section>
