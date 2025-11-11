@@ -35,20 +35,10 @@ const Header = () => {
                     </Link>
                 </li>
                 <li>
-                    <Link
-                        href="/reviews/"
-                        className={isActive("/reviews/") ? "font-bold" : ""}
-                    >
-                        Reviews
-                    </Link>
+                    <span>Reviews</span>
                 </li>
                 <li>
-                    <Link
-                        href="/about/"
-                        className={isActive("/about/") ? "font-bold" : ""}
-                    >
-                        About
-                    </Link>
+                    <span>About</span>
                 </li>
             </ul>
         </div>
