@@ -27,6 +27,7 @@ export interface WPLinks {
     "predecessor-version"?: WPLink[];
     "wp:attachment"?: WPLink[];
     "wp:term"?: WPLink[];
+    "wp:post_type"?: WPLink[];
     curies?: WPLink[];
 }
 
@@ -60,6 +61,21 @@ export interface WPPost {
     tags: number[];
     class_list: string[];
     acf: Record<string, unknown>;
+    _links: WPLinks;
+}
+
+// WordPress Genre taxonomy
+export interface WPGenre {
+    id: number;
+    count: number;
+    description: string;
+    link: string;
+    name: string;
+    slug: string;
+    taxonomy: string;
+    parent: number;
+    meta: unknown[];
+    acf: unknown[];
     _links: WPLinks;
 }
 
