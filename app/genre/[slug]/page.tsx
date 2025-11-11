@@ -1,10 +1,37 @@
-import { getBooksByGenre, getGenre } from "@/lib/api";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
+
+import { getBooksByGenre, getGenre, getGenres } from "@/lib/api";
 
 import Genres from "@/components/Genres";
 import BookList from "@/components/BookList";
 
-import Link from "next/link";
+export async function generateStaticParams() {
+    const genres = await getGenres();
+
+    return genres.map((genre) => ({
+        slug: genre.slug,
+    }));
+}
+
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+    const { slug } = await params;
+    const genre = await getGenre(slug);
+
+    if (!genre) {
+        return {
+            title: "Genre Not Found",
+        };
+    }
+
+    return {
+        title: `${genre.name} | Genres`,
+    };
+}
 
 export default async function GenrePage({
     params,

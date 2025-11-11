@@ -1,8 +1,37 @@
-import { getBook, getGenresById } from "@/lib/api";
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import type { Metadata } from "next";
+
+import { getBook, getBooks, getGenresById } from "@/lib/api";
 
 import Genres from "@/components/Genres";
+
+export async function generateStaticParams() {
+    const books = await getBooks();
+
+    return books.map((book) => ({
+        slug: book.slug,
+    }));
+}
+
+export async function generateMetadata({
+    params,
+}: {
+    params: Promise<{ slug: string }>;
+}): Promise<Metadata> {
+    const { slug } = await params;
+    const book = await getBook(slug);
+
+    if (!book) {
+        return {
+            title: "Book Not Found",
+        };
+    }
+
+    return {
+        title: book.title.rendered,
+    };
+}
 
 export default async function Book({
     params,
@@ -38,17 +67,22 @@ export default async function Book({
                     </li>
                     <li>
                         <div className="flex gap-1">
-                        <strong>{genres.length > 1 ? 'Genres:' : 'Genre:'}</strong>
-                        <div>
-                        {genres.map((genre, index) => (
-                            <span key={genre.id}>
-                                {index > 0 && ", "}
-                                <Link className="underline" href={`/genre/${genre.slug}`}>
-                                    {genre.name}
-                                </Link>
-                            </span>
-                        ))}
-                        </div>
+                            <strong>
+                                {genres.length > 1 ? "Genres:" : "Genre:"}
+                            </strong>
+                            <div>
+                                {genres.map((genre, index) => (
+                                    <span key={genre.id}>
+                                        {index > 0 && ", "}
+                                        <Link
+                                            className="underline"
+                                            href={`/genre/${genre.slug}`}
+                                        >
+                                            {genre.name}
+                                        </Link>
+                                    </span>
+                                ))}
+                            </div>
                         </div>
                     </li>
                 </ul>

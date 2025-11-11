@@ -1,5 +1,5 @@
-import fetchFromWordPress from "./rest-client";
-import type { WPPost, WPBook, WPGenre } from "./types";
+import { fetchFromWordPress, fetchSettings } from "./rest-client";
+import type { WPPost, WPBook, WPGenre, WPSettings } from "./types";
 
 export async function getPosts(): Promise<WPPost[]> {
     return fetchFromWordPress("/posts");
@@ -33,4 +33,8 @@ export async function getGenresById(
 export async function getGenre(slug: string): Promise<WPGenre | null> {
     const genres = await fetchFromWordPress<WPGenre[]>(`/genre?slug=${slug}`);
     return genres.length > 0 ? genres[0] : null;
+}
+
+export async function getSiteSettings(): Promise<WPSettings> {
+    return fetchSettings();
 }

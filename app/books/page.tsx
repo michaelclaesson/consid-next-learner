@@ -1,7 +1,13 @@
+import type { Metadata } from "next";
+
 import { getBooks } from "@/lib/api";
 
 import Genres from "@/components/Genres";
 import BookList from "@/components/BookList";
+
+export const metadata: Metadata = {
+    title: "Books",
+};
 
 export default async function Books() {
     const books = await getBooks();

@@ -4,6 +4,12 @@ export interface WPRendered {
     protected?: boolean;
 }
 
+// WordPress Settings type
+export interface WPSettings {
+    name: string;
+    description: string;
+}
+
 export interface WPLink {
     href: string;
     embeddable?: boolean;
