@@ -16,16 +16,23 @@ export default async function Book({
     }
 
     return (
-        <div className="flex justify-center gap-4 my-8 mx-auto w-full max-w-5xl">
+        <div className="flex justify-center gap-8 my-8 mx-auto w-full max-w-5xl">
             <Genres />
-            <section className="rounded-sm bg-neutral-200 p-6 w-3/4">
-                <h1 className="text-4xl font-bold mb-2" dangerouslySetInnerHTML={{ __html: book.title.rendered }} />
+            <section className="rounded-md bg-neutral-200 p-6 w-3/4">
+                <h1
+                    className="text-4xl font-bold mb-2"
+                    dangerouslySetInnerHTML={{ __html: book.title.rendered }}
+                />
                 <div
                     dangerouslySetInnerHTML={{ __html: book.content.rendered }}
                 />
                 <ul className="mt-4">
-                    <li><strong>Pages:</strong> {book.acf.pages}</li>
-                    <li><strong>Published:</strong> {book.acf.year}</li>
+                    <li>
+                        <strong>Pages:</strong> {book.acf.pages}
+                    </li>
+                    <li>
+                        <strong>Published:</strong> {book.acf.year}
+                    </li>
                 </ul>
             </section>
         </div>

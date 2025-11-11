@@ -14,6 +14,15 @@ export async function getBook(slug: string): Promise<WPBook | null> {
     return books.length > 0 ? books[0] : null;
 }
 
+export async function getBooksByGenre(genreId: number): Promise<WPBook[]> {
+    return fetchFromWordPress(`/book?genre=${genreId}`);
+}
+
 export async function getGenres(): Promise<WPGenre[]> {
     return fetchFromWordPress("/genre");
+}
+
+export async function getGenre(slug: string): Promise<WPGenre | null> {
+    const genres = await fetchFromWordPress<WPGenre[]>(`/genre?slug=${slug}`);
+    return genres.length > 0 ? genres[0] : null;
 }
