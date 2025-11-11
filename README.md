@@ -2,6 +2,8 @@
 
 A modern headless CMS implementation showcasing how to build a decoupled frontend with Next.js 16 that consumes WordPress REST API data. This project demonstrates the integration between a traditional WordPress backend and a modern React-based frontend.
 
+> **🔗 Companion Repository**: This frontend works in conjunction with [consid-wordpress-learner](https://github.com/michaelclaesson/consid-wordpress-learner), which provides the WordPress backend with custom post types, taxonomies, and REST API endpoints.
+
 ## What This Project Is
 
 This is a **Next.js 16 frontend application** that connects to a WordPress installation via the WordPress REST API. It demonstrates:
